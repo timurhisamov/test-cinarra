@@ -1,0 +1,21 @@
+---
+# tasks file for test1
+
+- name: Provision EC2 instance
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  roles:
+    - ec2
+  tags:
+  - status
+
+- name: Install Jenkins on EC2
+  hosts: ec2host
+  user: root
+  become: yes
+  become_method: sudo
+  vars:
+    ansible_ssh_private_key_file: "roles/jenkins/files/jenkins.pem"
+  roles:
+    - jenkins

@@ -1,0 +1,28 @@
+---
+- name: Configure access | Add a new user named cinarra
+  user:
+    name: cinarra
+    shell: /bin/bash
+    password: "{{ cinarra_password }}"
+
+- name: Configure access | Add cinarra user to the sudoers
+  copy:
+    dest: "/etc/sudoers.d/cinarra"
+    content: "cinarra  ALL=(ALL)  NOPASSWD: ALL"
+
+- name: Configure access | Deploy SSH Key
+  authorized_key: 
+    user: cinarra
+    key: "{{ lookup('file', 'roles/jenkins/files/cinarra_rsa.pub') }}"
+    state: present
+
+- name: Configure access | Allow cinarra user to ssh login
+  lineinfile: 
+    dest: /etc/ssh/sshd_config
+    regexp: '^AllowUsers'
+    line: 'Allowusers root ultraserve cinarra'
+
+- name: Configure access | Reload sshd config
+  systemd:
+    name: sshd
+    state: reloaded

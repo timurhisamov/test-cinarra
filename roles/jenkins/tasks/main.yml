@@ -1,0 +1,29 @@
+---
+
+- name: Install Jenkins
+  include: "install-centos.yml"
+
+- name: Security CentOS
+  include: "security-centos.yml"
+
+- name: Configure nginx proxy
+  include: "configure-proxy.yml"
+
+- name: Configure access
+  include: "configure-access.yml"
+
+- name: Check status of running app's
+  uri:
+    url: "http://{{ hostvars['EC2HOST']['dnsname'] }}:{{ port | default(80) }}/login?from=%2F"
+    method: GET
+  register: _result
+  until: _result.status == 200
+  tags:
+  - status
+
+- name: Rerise connection info
+  debug:
+    var: "{{ item }}"
+  with_items:
+    - "{{ hostvars['EC2HOST']['dnsname'] }}"
+    - jenkins_result.stdout
