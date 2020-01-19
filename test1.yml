@@ -1,0 +1,22 @@
+---
+# tasks file for test1
+#- name: Install Jenkins on EC2
+#  hosts: local
+#  become: yes
+#  become_method: sudo
+#  roles:
+#    - test1
+
+#- name: EC2
+- hosts: local
+  connection: local
+  become: no
+#  block:
+  tasks:
+  - include_tasks: "tasks/ec2.yml"
+
+#- name: Install Jenkins
+#  hosts: ec2host
+#  tasks:
+#    - "install-{{ ansible_distribution | lower }}.yml"
+#  environment: "{{ property_env }}"

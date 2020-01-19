@@ -1,0 +1,41 @@
+---
+- name: Install CentOS | Install packages
+  yum:
+    name: 
+      - wget
+      - java-1.8.0-openjdk
+    state: present
+
+- name: Install CentOS | Download jenkins.repo
+  get_url:
+    url: http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+    dest: /etc/yum.repos.d/jenkins.repo
+
+- name: Install CentOS | Import jenkins key
+  rpm_key:
+    state: present
+    key: https://jenkins-ci.org/redhat/jenkins-ci.org.key
+
+- name: Install CentOS | Install jenkins
+  yum:
+    name: jenkins
+    state: present
+
+- name: Install CentOS | Start and enable jenkins
+  systemd:
+    name: jenkins
+    state: started
+    enabled: true
+
+- name: Install CentOS | Sleep for 30 seconds and continue with play
+  wait_for: timeout=30
+  delegate_to: localhost
+
+- name: Install CentOS | Init password jenkin
+  shell: cat /var/lib/jenkins/secrets/initialAdminPassword
+  changed_when: false
+  register: result
+
+- name: Install CentOS | Print init password jenkins
+  debug:
+    var: result.stdout
