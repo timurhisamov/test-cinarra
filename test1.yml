@@ -1,22 +1,19 @@
 ---
 # tasks file for test1
-#- name: Install Jenkins on EC2
-#  hosts: local
-#  become: yes
-#  become_method: sudo
-#  roles:
-#    - test1
 
-#- name: EC2
-- hosts: local
+- name: Provision EC2 instance
+  hosts: localhost
   connection: local
-  become: no
-#  block:
-  tasks:
-  - include_tasks: "tasks/ec2.yml"
+  gather_facts: false
+  roles:
+    - ec2
 
-#- name: Install Jenkins
-#  hosts: ec2host
-#  tasks:
-#    - "install-{{ ansible_distribution | lower }}.yml"
-#  environment: "{{ property_env }}"
+- name: Install Jenkins on EC2
+  hosts: ec2host
+  user: root
+  become: yes
+  become_method: sudo
+  vars:
+    ansible_ssh_private_key_file: "roles/jenkins/files/jenkins.pem"
+  roles:
+    - jenkins

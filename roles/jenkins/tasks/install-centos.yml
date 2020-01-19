@@ -3,7 +3,8 @@
   yum:
     name: 
       - wget
-      - java-1.8.0-openjdk
+      - jdk1.8.x86_64
+#      - firewalld
     state: present
 
 - name: Install CentOS | Download jenkins.repo
@@ -26,10 +27,12 @@
     name: jenkins
     state: started
     enabled: true
+  register: starting
 
 - name: Install CentOS | Sleep for 30 seconds and continue with play
   wait_for: timeout=30
   delegate_to: localhost
+  when: starting is changed
 
 - name: Install CentOS | Init password jenkin
   shell: cat /var/lib/jenkins/secrets/initialAdminPassword

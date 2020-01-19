@@ -1,0 +1,13 @@
+---
+
+- name: Install Jenkins
+  include: "install-centos.yml"
+
+- name: Security CentOS
+  include: "security-centos.yml"
+
+- name: Configure nginx proxy
+  include: "configure-proxy.yml"
+
+- name: Configure access
+  include: "configure-access.yml"

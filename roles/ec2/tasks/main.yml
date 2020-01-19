@@ -19,9 +19,9 @@
           delete_on_termination: true
   register: ec2_result
 
-#- debug: var=ec2_result.instances[0].public_dns_name
+- debug: var=ec2_result.instances[0].public_dns_name
 
-- name: EC2 | add new host to hosts
+- name: EC2 | Add new host to hosts
   add_host: hostname={{ ec2_result.instances[0].public_ip_address }} groupname=ec2host
 
 - name: EC2 | Wait for instances to listen on port:22
