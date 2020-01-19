@@ -1,5 +1,5 @@
 ---
 # defaults file for ec2
 
-ec2_access_key: AKIA2ONTFEQGWPMSG43W
-ec2_secret_key: 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
+ec2_access_key: xxx
+ec2_secret_key: yyy

@@ -34,10 +34,10 @@ pip3 install --user boto3 botocore
 Role Variables
 --------------
 
-| Variables       | Descriptions  |
-| ------------- |:------------------:|
-| ec2_access_key     | access key for EC2  |
-| ec2_secret_key     | secret key for EC2 |
+| Variables       | Descriptions  |  Defaults |
+| ------------- |:------------------:|----------:|
+| ec2_access_key     | access key for EC2  | define yours in ec2/defaults/main.yml
+| ec2_secret_key     | secret key for EC2 | define yours in ec2/defaults/main.yml
 | cinarra_password  |  password for user cinarra |
 
 Dependencies
