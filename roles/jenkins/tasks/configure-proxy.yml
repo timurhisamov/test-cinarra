@@ -30,7 +30,7 @@
     owner: root
     group: root
     mode: 0640
-  notify: nginx reload
+  notify: nginx_reload
 
 - name: Configure nginx proxy | Copy proxy config to /etc
   template:
@@ -39,4 +39,4 @@
     owner: root
     group: root
     mode: 0640
-  notify: nginx reload
+  notify: nginx_reload

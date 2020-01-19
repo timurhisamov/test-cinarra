@@ -37,8 +37,8 @@
 - name: Install CentOS | Init password jenkin
   shell: cat /var/lib/jenkins/secrets/initialAdminPassword
   changed_when: false
-  register: result
+  register: jenkins_result
 
 - name: Install CentOS | Print init password jenkins
   debug:
-    var: result.stdout
+    var: jenkins_result.stdout

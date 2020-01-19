@@ -1,6 +1,6 @@
 ---
 # handlers file for jenkins
-- name: nginx restart
+- name: nginx_reload
   service:
     name: nginx
     state: reloaded

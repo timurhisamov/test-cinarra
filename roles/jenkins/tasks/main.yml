@@ -11,3 +11,10 @@
 
 - name: Configure access
   include: "configure-access.yml"
+
+- name: Rerise connection info
+  debug:
+    var: "{{ item }}"
+  with_items:
+    - "{{ hostvars['EC2HOST']['dnsname'] }}"
+    - jenkins_result.stdout
