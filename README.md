@@ -1,4 +1,4 @@
-Role Name
+Deploy Jenkins on EC2
 =========
 
 ## Cinarra test repo
@@ -48,7 +48,7 @@ Dependencies
 License
 -------
 
-BSD
+
 
 Author Information
 ------------------
