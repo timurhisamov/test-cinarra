@@ -17,12 +17,6 @@
     name: nginx
     state: present
 
-- name: Configure nginx proxy | Start and enable nginx
-  systemd:
-    name: nginx
-    state: started
-    enabled: true
-
 - name: Configure nginx proxy | Copy nginx config to /etc
   template:
     src: templates/nginx.conf.j2
@@ -40,3 +34,9 @@
     group: root
     mode: 0640
   notify: nginx_reload
+
+- name: Configure nginx proxy | Start and enable nginx
+  systemd:
+    name: nginx
+    state: started
+    enabled: true

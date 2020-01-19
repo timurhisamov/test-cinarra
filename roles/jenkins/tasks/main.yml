@@ -12,6 +12,15 @@
 - name: Configure access
   include: "configure-access.yml"
 
+- name: Check status of running app's
+  uri:
+    url: "http://{{ hostvars['EC2HOST']['dnsname'] }}:{{ port | default(80) }}/login?from=%2F"
+    method: GET
+  register: _result
+  until: _result.status == 200
+  tags:
+  - status
+
 - name: Rerise connection info
   debug:
     var: "{{ item }}"

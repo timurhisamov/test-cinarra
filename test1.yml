@@ -7,6 +7,8 @@
   gather_facts: false
   roles:
     - ec2
+  tags:
+  - status
 
 - name: Install Jenkins on EC2
   hosts: ec2host

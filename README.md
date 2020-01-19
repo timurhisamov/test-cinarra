@@ -16,6 +16,13 @@ Disable SE Linux, add user Cinarra with SSH key.
     * Check status of running app's
 4. Please reply with the private key for cinarra user. 
 
+Run
+------------
+
+~~~bash
+ansible-playbook test1.yml --ask-become-pass
+~~~
+
 Requirements
 ------------
 
@@ -27,21 +34,16 @@ pip3 install --user boto3 botocore
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+| Variables       | Descriptions  |
+| ------------- |:------------------:|
+| ec2_access_key     | access key for EC2  |
+| ec2_secret_key     | secret key for EC2 |
+| cinarra_password  |  password for user cinarra |
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
-
-Example Playbook
-----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+---
 
 License
 -------
